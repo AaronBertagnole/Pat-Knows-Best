@@ -52,7 +52,7 @@ const pat = {
   },
 
   /**
-   * Returns Pats recommendations to the user
+   * Returns Pats recommendations to the user for video games
    * @param {number} [limit=3] - The amount of items to return
    *
    * @returns {json}
@@ -61,6 +61,11 @@ const pat = {
 
   },
 
+  /**
+   *  Returns Pats recommendations to the user for board games
+   * @param {number} [limit=3] - The number of items we want to retrieve.
+   * @return {json}
+   */
   async recommendBoardGames(limit = 3) {
 
   }
