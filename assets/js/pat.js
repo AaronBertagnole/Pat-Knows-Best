@@ -11,6 +11,7 @@ const pat = {
     console.log("URL: ",url);
 
     $.get(url, queryString, function(data) {
+      console.log(data);
       return data;
     });
   },
