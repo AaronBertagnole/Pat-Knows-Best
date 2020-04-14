@@ -8,47 +8,63 @@ const pat = {
    * @param {string} url - The Url you want to use in the fetch
    * @return {json}
    */
-  async search(url) {
-    const response = await fetch(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': "Pat Knows Best"
-      },
+  search(url, callback) {
+    $.ajax({
+      url: url,
+      method: "GET",
+      success: function(result, status, xhr) {
+        callback(result);
+      }
     });
-    return response.json();
+
+
   },
 
   /**
    * Searches the rawg.io api for the game provided, along with what platform they would like.
    * @param {string} searchTerm - The game we are searching for.
    * @param {number} platform - The platform that we want to search under that we get from platform dropdown.
-   * @param {number} [page=1] - The page we want to start on.
-   * @param {number} [limit=10] - The amount of items per page.
+   * @param {Object} options - The Options for the search.
+   * @param {number} [options.page=1] - The Page we are currently on.
+   * @param {number} [options.limit=10] - The amount of items we will retrieve at a time.
    *
-   * @return {json}
+   * @param callback
+   *
    */
-  async searchVideoGames(searchTerm, platform, page = 1, limit = 10) {
+  searchVideoGames(searchTerm, platform, options, callback) {
+    const page = options.page || 1;
+    const limit = options.limit || 10;
     const baseUrl = "https://api.rawg.io/api/games";
     const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
 
-    return this.search(baseUrl + queryString);
+    pat.search(baseUrl + queryString, function(response) {
+      console.log("Response: ", response);
+      callback(response);
+    });
   },
 
   /**
    * Searches the boardgameatlas.com api for the game provided
    * @param {string} name - The board game we are searching for.
-   * @param {number} [limit=10] - The amount of items to return
-   * @param {string} [orderBy= - The way the items are ordered by.
-   * @param {boolean} [fuzzyMatch=true] - If set to true it helps with typos
+   * @param {Object} options - The Options for the search.
+   * @param {number} [options.limit=10] - The amount of items to return
+   * @param {string} [options.orderBy="popularity"] - The way the items are ordered by.
+   * @param {boolean} [options.fuzzyMatch=true] - If set to true it helps with typos
    *
-   * @returns {json}
+   * @param callback
    */
-  async searchBoardGames(name, limit = 10, orderBy = "popularity", fuzzyMatch = true) {
-    const baseUrl = "https://www.boardgameatlas.com/api/search";
-    const queryString = "?name=" + name+ "&limit=" + limit+ "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
-    console.log(baseUrl + queryString);
+  searchBoardGames(name, options, callback) {
+    const limit = options.limit || 10;
+    const orderBy = options.orderBy || "popularity";
+    const fuzzyMatch  = options.fuzzyMatch || true;
 
-   return this.search(baseUrl + queryString);
+    const baseUrl = "https://www.boardgameatlas.com/api/search";
+    const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
+
+    pat.search(baseUrl + queryString, function(response) {
+      console.log("Response: ", response);
+      callback(response);
+    });
   },
 
   /**
@@ -57,7 +73,7 @@ const pat = {
    *
    * @returns {json}
    */
-  async recommendVideoGames(limit = 3) {
+  recommendVideoGames(limit = 3) {
 
   },
 
@@ -66,7 +82,13 @@ const pat = {
    * @param {number} [limit=3] - The number of items we want to retrieve.
    * @return {json}
    */
-  async recommendBoardGames(limit = 3) {
-
+  recommendBoardGames(limit = 3) {
+    const baseUrl = "https://www.boardgameatlas.com/api/search";
+    const queryString = "?random=true&limit=3&client_id=AoMOmUcuiK";
+    let recommends = [];
+    for(let i = 0; i < limit; i++) {
+      recommends.push(this.search(baseUrl + queryString));
+    }
+    return recommends;
   }
 };
