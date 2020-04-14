@@ -5,8 +5,11 @@ $("#search").keypress(function () {
   clearTimeout(keyTimer);
   if( $(this).val().length >= 3 ) {
     keyTimer = setTimeout(function(){
-      const results = pat.searchVideoGames($("#search").val());
-      console.log(results);
+      pat.searchVideoGames($("#search").val(), 4).then((data) => {
+        for(let i = 0; i < data.results.length; i++) {
+          console.log(data.results[i].name);
+        }
+      });
     }, 1000);
   }
 });
