@@ -66,12 +66,16 @@ const pat = {
 
   /**
    * Returns Pats recommendations to the user for video games
-   * @param {number} [limit=3] - The amount of items to return
+   * @param {number} gameId - The Id of the game we want to get recommendations for.
+   * @param {number} platform - The id of the platform we are searching under.
+   * @param {Object} options - The Options that for the query
+   * @param {number} [options.limit=3] - The amount of items to return.
+   * @param callback
    *
    * @returns {json}
-   * 
    */
-recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
+  recommendVideoGames(gameId, platform = 4, options, callback) {
+    const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
       pat.search(baseUrl, function (response) {
         console.log("Video game recommendations: ", response);
@@ -81,8 +85,9 @@ recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
 
   /**
    *  Returns Pats recommendations to the user for board games
-   * @param {number} [limit=3] - The number of items we want to retrieve.
-   * @return {json}
+   * @param {Object} options - The Options that for the query
+   * @param {number} [options.limit=3] - The number of items we want to retrieve.
+   * @returns {json}
   */
   recommendBoardGames(options, callback) {
     const limit = options.limit || 3;
@@ -96,8 +101,6 @@ recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
     }
   },
 
-
-
   getPlatforms(callback) {
     let platforms = [{id:0, name:"Board Game", slug:"board-game"}];
     const url = "https://api.rawg.io/api/platforms";
@@ -110,11 +113,12 @@ recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
       callback(platforms);
     });
   }
+
 };
 
 pat.getPlatforms();
 
-pat.recommendVideoGames(3498, 3, 4, function (response) {
+pat.recommendVideoGames(3498, 3, {}, function (response) {
   console.log("Video game results: ", response);
 });
 
