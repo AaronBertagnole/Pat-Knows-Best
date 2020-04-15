@@ -56,9 +56,9 @@ const pat = {
     const fuzzyMatch = options.fuzzyMatch || true;
 
     const baseUrl = "https://www.boardgameatlas.com/api/search";
-    const queryString = "?name=" + name + "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
-
-    pat.search(baseUrl + queryString, function (response) {
+    const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
+   
+    pat.search(baseUrl + queryString, function(response) {
       console.log("Search Board Games: ", response);
       callback(response);
     });
@@ -71,25 +71,34 @@ const pat = {
    * @returns {json}
    * 
    */
-  recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
+
+recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
     const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
-    // for (i = 0; i < limit; i++) {
       pat.search(baseUrl, function (response) {
         console.log("Video game recommendations: ", response);
         callback(response);
       });
-    // }
   },
 
   /**
    *  Returns Pats recommendations to the user for board games
    * @param {number} [limit=3] - The number of items we want to retrieve.
    * @return {json}
-   */
-  recommendBoardGames(limit = 3) {
+  */
+
+  recommendBoardGames(options, callback) {
+    const limit = options.limit || 3;
     const baseUrl = "https://www.boardgameatlas.com/api/search";
     const queryString = "?random=true&client_id=AoMOmUcuiK";
+    for (let i = 0; i < limit; i++) {
+      pat.search(baseUrl + queryString, function (response){
+        console.log("random game is ", response);
+        callback(response);
+      });
+    }
   },
+
+  
 
   getPlatforms() {
     let platforms = ["board game"];
@@ -101,6 +110,12 @@ const pat = {
 };
 
 pat.getPlatforms();
+
 pat.recommendVideoGames(3498, 3, 4, function (response) {
   console.log("Video game results: ", response);
+});
+
+pat.recommendBoardGames({}, function(response) {
+  console.log("Recommended Board Games: ", response.game.name);
+
 });
