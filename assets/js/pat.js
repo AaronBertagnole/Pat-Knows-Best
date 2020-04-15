@@ -16,8 +16,6 @@ const pat = {
         callback(result);
       }
     });
-
-
   },
 
   /**
@@ -26,19 +24,19 @@ const pat = {
    * @param {number} platform - The platform that we want to search under that we get from platform dropdown.
    * @param {Object} options - The Options for the search.
    * @param {number} [options.page=1] - The Page we are currently on.
-   * @param {number} [options.limit=10] - The amount of items we will retrieve at a time.
+   * @param {number} [options.limit=3] - The amount of items we will retrieve at a time.
    *
    * @param callback
    *
    */
   searchVideoGames(searchTerm, platform, options, callback) {
     const page = options.page || 1;
-    const limit = options.limit || 10;
+    const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games";
     const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
 
     pat.search(baseUrl + queryString, function(response) {
-      console.log("Response: ", response);
+      console.log("Search Video Games: ", response);
       callback(response);
     });
   },
@@ -54,7 +52,7 @@ const pat = {
    * @param callback
    */
   searchBoardGames(name, options, callback) {
-    const limit = options.limit || 10;
+    const limit = options.limit || 3;
     const orderBy = options.orderBy || "popularity";
     const fuzzyMatch  = options.fuzzyMatch || true;
 
@@ -62,7 +60,7 @@ const pat = {
     const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
 
     pat.search(baseUrl + queryString, function(response) {
-      console.log("Response: ", response);
+      console.log("Search Board Games: ", response);
       callback(response);
     });
   },
@@ -84,11 +82,16 @@ const pat = {
    */
   recommendBoardGames(limit = 3) {
     const baseUrl = "https://www.boardgameatlas.com/api/search";
-    const queryString = "?random=true&limit=3&client_id=AoMOmUcuiK";
-    let recommends = [];
-    for(let i = 0; i < limit; i++) {
-      recommends.push(this.search(baseUrl + queryString));
-    }
-    return recommends;
+    const queryString = "?random=true&client_id=AoMOmUcuiK";
+  },
+
+  getPlatforms() {
+    let platforms = ["board game"];
+    const url = "https://api.rawg.io/api/platforms";
+    pat.search(url, function(response) {
+      console.log("platforms", response);
+    });
   }
 };
+
+pat.getPlatforms();
