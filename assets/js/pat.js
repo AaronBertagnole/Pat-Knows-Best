@@ -2,7 +2,6 @@ const pat = {
 
   // Variables For The Pat Class
 
-
   /**
    * This is the main search method. Searches any api and returns the results in json
    * @param {string} url - The Url you want to use in the fetch
@@ -12,7 +11,7 @@ const pat = {
     $.ajax({
       url: url,
       method: "GET",
-      success: function(result, status, xhr) {
+      success: function (result, status, xhr) {
         callback(result);
       }
     });
@@ -35,7 +34,7 @@ const pat = {
     const baseUrl = "https://api.rawg.io/api/games";
     const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
 
-    pat.search(baseUrl + queryString, function(response) {
+    pat.search(baseUrl + queryString, function (response) {
       console.log("Search Video Games: ", response);
       callback(response);
     });
@@ -54,12 +53,12 @@ const pat = {
   searchBoardGames(name, options, callback) {
     const limit = options.limit || 3;
     const orderBy = options.orderBy || "popularity";
-    const fuzzyMatch  = options.fuzzyMatch || true;
+    const fuzzyMatch = options.fuzzyMatch || true;
 
     const baseUrl = "https://www.boardgameatlas.com/api/search";
-    const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
+    const queryString = "?name=" + name + "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
 
-    pat.search(baseUrl + queryString, function(response) {
+    pat.search(baseUrl + queryString, function (response) {
       console.log("Search Board Games: ", response);
       callback(response);
     });
@@ -70,9 +69,16 @@ const pat = {
    * @param {number} [limit=3] - The amount of items to return
    *
    * @returns {json}
+   * 
    */
-  recommendVideoGames(limit = 3) {
-
+  recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
+    const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
+    // for (i = 0; i < limit; i++) {
+      pat.search(baseUrl, function (response) {
+        console.log("Video game recommendations: ", response);
+        callback(response);
+      });
+    // }
   },
 
   /**
@@ -88,10 +94,13 @@ const pat = {
   getPlatforms() {
     let platforms = ["board game"];
     const url = "https://api.rawg.io/api/platforms";
-    pat.search(url, function(response) {
+    pat.search(url, function (response) {
       console.log("platforms", response);
     });
   }
 };
 
 pat.getPlatforms();
+pat.recommendVideoGames(3498, 3, 4, function (response) {
+  console.log("Video game results: ", response);
+});
