@@ -1,0 +1,14 @@
+body {
+  background-color: #ECECEC;
+}
+
+.btn {
+  font-family: Oswald, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+#search-button {
+  background-color: #C6383B;
+  color: #ffffff;
+}

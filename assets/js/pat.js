@@ -5,13 +5,18 @@ const pat = {
   /**
    * This is the main search method. Searches any api and returns the results in json
    * @param {string} url - The Url you want to use in the fetch
+   * @param callback
    * @return {json}
    */
   search(url, callback) {
     $.ajax({
       url: url,
       method: "GET",
-      success: function (result, status, xhr) {
+      headers: {
+        //"Access-Control-Allow-Origin": "*",
+        //"Access-Control-Allow-Headers": "*"
+      },
+      success: function (result) {
         callback(result);
       }
     });
@@ -57,7 +62,7 @@ const pat = {
 
     const baseUrl = "https://www.boardgameatlas.com/api/search";
     const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
-   
+
     pat.search(baseUrl + queryString, function(response) {
       console.log("Search Board Games: ", response);
       callback(response);
@@ -66,13 +71,16 @@ const pat = {
 
   /**
    * Returns Pats recommendations to the user for video games
-   * @param {number} [limit=3] - The amount of items to return
+   * @param {number} gameId - The Id of the game we want to get recommendations for.
+   * @param {number} platform - The id of the platform we are searching under.
+   * @param {Object} options - The Options that for the query
+   * @param {number} [options.limit=3] - The amount of items to return.
+   * @param callback
    *
    * @returns {json}
-   * 
    */
-
-recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
+  recommendVideoGames(gameId, platform = 4, options, callback) {
+    const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
       pat.search(baseUrl, function (response) {
         console.log("Video game recommendations: ", response);
@@ -82,10 +90,10 @@ recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
 
   /**
    *  Returns Pats recommendations to the user for board games
-   * @param {number} [limit=3] - The number of items we want to retrieve.
-   * @return {json}
+   * @param {Object} options - The Options that for the query
+   * @param {number} [options.limit=3] - The number of items we want to retrieve.
+   * @returns {json}
   */
-
   recommendBoardGames(options, callback) {
     const limit = options.limit || 3;
     const baseUrl = "https://www.boardgameatlas.com/api/search";
@@ -98,24 +106,21 @@ recommendVideoGames(gameId, limit = 3, platform = 4, callback) {
     }
   },
 
-  
-
-  getPlatforms() {
-    let platforms = ["board game"];
+  /**
+   * Gets all the platforms and puts board game as the first choice.
+   * @param callback
+   */
+  getPlatforms(callback) {
+    let platforms = [{id:0, name:"Board Game", slug:"board-game"}];
     const url = "https://api.rawg.io/api/platforms";
-    pat.search(url, function (response) {
-      console.log("platforms", response);
+    pat.search(url, function(response) {
+      for(let i = 0; i < response.results.length; i++) {
+        const platform = response.results[i];
+        platforms.push(platform);
+      }
+       callback(platforms);
     });
-  }
+  },
+
 };
 
-pat.getPlatforms();
-
-pat.recommendVideoGames(3498, 3, 4, function (response) {
-  console.log("Video game results: ", response);
-});
-
-pat.recommendBoardGames({}, function(response) {
-  console.log("Recommended Board Games: ", response.game.name);
-
-});
