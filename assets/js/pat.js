@@ -75,15 +75,7 @@ const pat = {
 
   },
 
-  /**
-   *  Returns Pats recommendations to the user for board games
-   * @param {number} [limit=3] - The number of items we want to retrieve.
-   * @return {json}
-   */
-  recommendBoardGames(limit = 3) {
-    const baseUrl = "https://www.boardgameatlas.com/api/search";
-    const queryString = "?random=true&client_id=AoMOmUcuiK";
-  },
+
 
   getPlatforms(callback) {
     let platforms = [{id:0, name:"Board Game", slug:"board-game"}];
