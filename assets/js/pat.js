@@ -85,11 +85,16 @@ const pat = {
     const queryString = "?random=true&client_id=AoMOmUcuiK";
   },
 
-  getPlatforms() {
-    let platforms = ["board game"];
+  getPlatforms(callback) {
+    let platforms = [{id:0, name:"Board Game", slug:"board-game"}];
     const url = "https://api.rawg.io/api/platforms";
     pat.search(url, function(response) {
-      console.log("platforms", response);
+      console.log("platforms: ", response);
+      for(let i = 0; i < response.length; i++) {
+        platforms.push(response[i]);
+      }
+      console.log("New Platforms: ", platforms);
+      callback(platforms);
     });
   }
 };

@@ -32,3 +32,11 @@ $("#search").keypress(function () {
     }, 300);
   }
 });
+
+pat.getPlatforms(function (results) {
+  for(let i = 0; i < results.length; i++) {
+    const option = $("<option value='" + results[i].id + "'>" + results[i].name + "</option>");
+    $(option).appendTo($("#platform"));
+  }
+});
+
