@@ -58,7 +58,7 @@ const pat = {
 
     const baseUrl = "https://www.boardgameatlas.com/api/search";
     const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
-
+   
     pat.search(baseUrl + queryString, function(response) {
       console.log("Search Board Games: ", response);
       callback(response);
@@ -71,6 +71,9 @@ const pat = {
    *
    * @returns {json}
    */
+
+  
+
   recommendVideoGames(limit = 3) {
 
   },
@@ -79,11 +82,21 @@ const pat = {
    *  Returns Pats recommendations to the user for board games
    * @param {number} [limit=3] - The number of items we want to retrieve.
    * @return {json}
-   */
-  recommendBoardGames(limit = 3) {
+*/
+
+  recommendBoardGames(options, callback) {
+    const limit = options.limit || 3;
     const baseUrl = "https://www.boardgameatlas.com/api/search";
     const queryString = "?random=true&client_id=AoMOmUcuiK";
+    for (let i = 0; i < limit; i++) {
+      pat.search(baseUrl + queryString, function (response){
+        console.log("random game is ", response);
+        callback(response);
+      });
+    }
   },
+
+  
 
   getPlatforms() {
     let platforms = ["board game"];
@@ -95,3 +108,7 @@ const pat = {
 };
 
 pat.getPlatforms();
+pat.recommendBoardGames({}, function(response) {
+  console.log("Recommended Board Games: ", response.game.name);
+
+});
