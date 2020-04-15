@@ -5,13 +5,18 @@ const pat = {
   /**
    * This is the main search method. Searches any api and returns the results in json
    * @param {string} url - The Url you want to use in the fetch
+   * @param callback
    * @return {json}
    */
   search(url, callback) {
     $.ajax({
       url: url,
       method: "GET",
-      success: function (result, status, xhr) {
+      headers: {
+        //"Access-Control-Allow-Origin": "*",
+        //"Access-Control-Allow-Headers": "*"
+      },
+      success: function (result) {
         callback(result);
       }
     });
@@ -101,28 +106,21 @@ const pat = {
     }
   },
 
+  /**
+   * Gets all the platforms and puts board game as the first choice.
+   * @param callback
+   */
   getPlatforms(callback) {
     let platforms = [{id:0, name:"Board Game", slug:"board-game"}];
     const url = "https://api.rawg.io/api/platforms";
     pat.search(url, function(response) {
-      console.log("platforms: ", response);
-      for(let i = 0; i < response.length; i++) {
-        platforms.push(response[i]);
+      for(let i = 0; i < response.results.length; i++) {
+        const platform = response.results[i];
+        platforms.push(platform);
       }
-      console.log("New Platforms: ", platforms);
-      callback(platforms);
+       callback(platforms);
     });
-  }
+  },
 
 };
-
-pat.getPlatforms();
-
-pat.recommendVideoGames(3498, 3, {}, function (response) {
-  console.log("Video game results: ", response);
-});
-
-pat.recommendBoardGames({}, function(response) {
-  console.log("Recommended Board Games: ", response.game.name);
-});
 
