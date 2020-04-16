@@ -1,6 +1,30 @@
-body {
-  background-color: #ECECEC;
+
+:root {
+  --color-light: #ffffff;
+  --color-dark: #202020;
+  --color-red: #C6383B;
+  --color-primary: #dbffa2;
+  --color-secondary: hsl(169, 90%, 88%);
+  --color-accent: #ff7750;
+  --background: #ECECEC;
+  --foreground: #202020;
+
 }
+
+.nightMode {
+  --color-light: #ffffff;
+  --color-dark: #202020;
+  --color-red: #C6383B;
+  --background: #202020;
+  --foreground: #FFFFFF;
+}
+
+body {
+    background: var(--background);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
 
 .btn {
   font-family: Oswald, sans-serif;
@@ -11,4 +35,22 @@ body {
 #search-button {
   background-color: #C6383B;
   color: #ffffff;
+}
+
+.nightModeToggle {
+  position: absolute;
+  z-index: 100;
+  top: 1em;
+  right: 1em;
+  color: var(--foreground);
+  border: 2px solid currentColor;
+  padding: 4px;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+}
+.img-fluid {
+  background-color: var(--background);
 }
