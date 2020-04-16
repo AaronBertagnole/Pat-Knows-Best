@@ -11,29 +11,18 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- Plugins -->
   <link rel="stylesheet" href="assets/plugins/autocomplete/jquery.autocomplete.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
-  <div>
-    <div class="col-12 text-right">
-      <button 
-        id = "nightModeToggle"
-        class = "nightModeToggle"
-        aria-label="toggle night mode"
-        >
-          <svg
-            width = 80px
-            xmlns= "https://www.w3.org/TR/SVG2/"
-            viewbox = "0 0 2500 496"
-          >
-          <path fill="currentColor" d="M8,256C8,393,119,504,256,504S504,393,504,
-          256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" 
-          transform="translate(-8 -8)"/></svg>
-            </button>
-    </div>
+
+  <!--Change between Light and Dark Themes-->
+  <div id="night-mode-toggle">
+    <i class="fa fa-adjust"></i> <span>Change To Dark Mode</span>
   </div>
+
 
 
   <div class="container">
@@ -78,6 +67,8 @@
   <script type="text/javascript" src="assets/js/pat.js"></script>
   <!-- Main App JS -->
   <script type="text/javascript" src="assets/js/app.js"></script>
+  <!-- Night Mode -->
+  <script type="text/javascript" src="assets/js/nightmode.js"></script>
   <!-- Inline Script -->
   <script type="text/javascript"></script>
 </body>

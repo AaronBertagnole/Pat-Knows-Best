@@ -11,7 +11,7 @@
 
 }
 
-.nightMode {
+.night-mode {
   --color-light: #ffffff;
   --color-dark: #202020;
   --color-red: #C6383B;
@@ -37,19 +37,17 @@ body {
   color: #ffffff;
 }
 
-.nightModeToggle {
+#night-mode-toggle {
   position: absolute;
   z-index: 100;
-  top: 1em;
-  right: 1em;
+  top: 10px;
+  right: 10px;
   color: var(--foreground);
-  border: 2px solid currentColor;
-  padding: 4px;
+
+
   background: transparent;
   cursor: pointer;
-  border-radius: 5px;
-  width: 30px;
-  height: 30px;
+
 }
 .img-fluid {
   background-color: var(--background);
