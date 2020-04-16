@@ -6,6 +6,7 @@ const nightMode = {
     $("body").addClass("night-mode");
     localStorage.setItem("nightMode", "enabled");
     $("#night-mode-toggle span").html("Change To Light Mode");
+    $("#logo").attr("src", "assets/images/logo-dark-mode.png");
   },
 
   /**
@@ -15,6 +16,7 @@ const nightMode = {
     $("body").removeClass("night-mode");
     localStorage.setItem("nightMode", "disabled");
     $("#night-mode-toggle span").html("Change To Dark Mode");
+    $("#logo").attr("src", "assets/images/logo.png");
   },
 };
 

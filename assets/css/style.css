@@ -8,7 +8,6 @@
   --color-accent: #ff7750;
   --background: #ECECEC;
   --foreground: #202020;
-
 }
 
 .night-mode {
@@ -32,6 +31,10 @@ body {
   text-transform: uppercase;
 }
 
+#pat {
+  max-height: 250px;
+}
+
 #search-button {
   background-color: #C6383B;
   color: #ffffff;
@@ -49,6 +52,6 @@ body {
   cursor: pointer;
 
 }
-.img-fluid {
-  background-color: var(--background);
-}
+
+
+
