@@ -36,13 +36,21 @@ const pat = {
   searchVideoGames(searchTerm, platform, options, callback) {
     const page = options.page || 1;
     const limit = options.limit || 3;
-    const baseUrl = "https://api.rawg.io/api/games";
-    const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
+    const url = pat.getVideoGameUrl(searchTerm, platform);
 
-    pat.search(baseUrl + queryString, function (response) {
+    pat.search(url, function (response) {
       console.log("Search Video Games: ", response);
       callback(response);
     });
+  },
+
+  getVideoGameUrl(searchTerm, platform, options) {
+    const page = options.page || 1;
+    const limit = options.limit || 3;
+    const baseUrl = "https://api.rawg.io/api/games";
+    const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
+
+    return baseUrl + queryString;
   },
 
   /**

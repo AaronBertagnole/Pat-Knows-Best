@@ -20,11 +20,8 @@ $("#search").keyup(function () {
         });
       } else if ( platform > 0) {
         // Search for video games
-        pat.searchVideoGames($("#search").val(), platform, {}, function(results) {
-          const games = results.results;
-          for(let i = 0; i < games.length; i++) {
-            console.log(games[i].name);
-          }
+        $("#search").autocompleter({
+            source: pat.getVideoGameUrl()
         });
       } else {
         //TODO:: Display that they need to select a platform for the search
