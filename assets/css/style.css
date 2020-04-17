@@ -99,12 +99,14 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
+
+
 #pat {
   max-height: 250px;
   position: relative;
-  top:15%;
-  left: 1%;
-  bottom: 10%
+  top:48px;
+  left: -180px;
+  bottom: 0;
 }
 
 #logo {
