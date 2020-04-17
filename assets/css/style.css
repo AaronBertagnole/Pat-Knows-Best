@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .box .body {
-
+  margin-left: 10px;
 }
 
 .box.small {
@@ -101,6 +101,15 @@ h1, h2, h3, h4, h5, h6 {
 
 #pat {
   max-height: 250px;
+  position: relative;
+  top:15%;
+  left: 1%;
+  bottom: 10%
+}
+
+#logo {
+  position: sticky;
+  top: 70%;
 }
 
 #search-button {
