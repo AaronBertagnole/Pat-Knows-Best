@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 // JavaScript (jQuery) example
 var settings = {
@@ -66,13 +67,15 @@ nightModeToggle.addEventListener('click', () => {
   }
 });
 
+=======
+>>>>>>> 6b828b4a70d59d254c9c264cd3f0383dafb2f5fe
 const pat = {
 
   // Variables For The Pat Class
 
   /**
-   * This is the main search method. Searches any api and returns the results in json
-   * @param {string} url - The Url you want to use in the fetch
+   * This is the main search method. Searches any api and returns the results in json.
+   * @param {string} url - The Url you want to use in the fetch.
    * @param callback
    * @return {json}
    */
@@ -80,10 +83,6 @@ const pat = {
     $.ajax({
       url: url,
       method: "GET",
-      headers: {
-        //"Access-Control-Allow-Origin": "*",
-        //"Access-Control-Allow-Headers": "*"
-      },
       success: function (result) {
         callback(result);
       }
@@ -106,10 +105,17 @@ const pat = {
     const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games";
     const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
-
     pat.search(baseUrl + queryString, function (response) {
       console.log("Search Video Games: ", response);
       callback(response);
+    });
+  },
+
+  getVideoGameById(id, callback) {
+    const baseUrl = "https://api.rawg.io/api/games/" + id;
+    pat.search(baseUrl, function(result) {
+      console.log("Video Game: ", result);
+      callback(result);
     });
   },
 
@@ -181,7 +187,7 @@ const pat = {
   getPlatforms(callback) {
     let platforms = [{id:0, name:"Board Game", slug:"board-game"}];
     const url = "https://api.rawg.io/api/platforms";
-    pat.search(url, function(response) {
+    pat.search(url,function(response) {
       for(let i = 0; i < response.results.length; i++) {
         const platform = response.results[i];
         platforms.push(platform);
