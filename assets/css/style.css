@@ -7,11 +7,14 @@
   --color-accent: #ff7750;
   --background: #ECECEC;
   --foreground: #202020;
+  --text-color: #202020;
+
 }
 
 .night-mode {
   --background: var(--color-dark);
   --foreground: var(--color-light);
+  --text-color: #ECECEC;
 }
 
 body {
@@ -97,6 +100,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .box .website > span {
   color: var(--color-secondary);
+}
+
+.visibleText {
+  color: var(--text-color);
 }
 
 #pat {
