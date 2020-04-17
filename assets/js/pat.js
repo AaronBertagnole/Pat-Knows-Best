@@ -1,3 +1,37 @@
+
+// JavaScript (jQuery) example
+var settings = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://avatargen.io/api/generator",
+  "method": "POST",
+  "headers": {
+      "content-type": "application/x-www-form-urlencoded",
+      "cache-control": "no-cache"
+      "apiKey": "MY_API_KEY"
+  },
+  "data": { // from your users
+      "gender": "female",
+      "skin_tone": "light",
+      "head_shape": "diamond",
+      "hair_length": "short",
+      "hair_color": "blond",
+      "hair_type": "straight",
+      "hair_style": "blow_out",
+      "eye_color": "blue",
+      "glasses": "square",
+      "body_type": "generic"
+  }
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response.avatar); // >> "data:image/png;base64,somechars=="
+  // $("img").attr("src", response.avatar);
+});
+        
+
+
+
 //night mode javascript
 //we grab the value of "nightMode" from local storage and use it later, basically check and see if user 
 //has night mode enabled or dabled
