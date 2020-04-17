@@ -25,7 +25,7 @@ $("#search").keyup(function () {
           for(let i = 0; i < games.length; i++) {
             console.log(games[i].name);
             pat.getVideoGameById(games[i].id, function(result) {
-              cards.renderLargeVideoGameCard(result);
+              cards.renderSmallVideoGameCards(result);
             });
 
           }

@@ -57,6 +57,7 @@ cards = {
   
   renderSmallVideoGameCards (game) {
     const smallCard = $('<div class="col-4">');
+    const box = $('<div class="box small">');
     const boxRow = $('<div class="row no-gutters">');
     const gameImageContainer = $('<div class="col-2">');
     const gameImage = $('<img class="img-fluid float-left" src="" alt="" />');
@@ -86,7 +87,7 @@ cards = {
     $(gameImage).attr("src", game.background_image);
     $(title).html(game.name);
     $(subTitle).html(rating + " " + genres);
-    $(content).html(game.description_raw.slice(0,350) + "...");
+    $(content).html(game.description_raw.slice(0,250) + "...");
     $(website).html("Website: <span>" + game.website + "</span>");
     
     $(website).appendTo(footerContainer);
@@ -103,9 +104,9 @@ cards = {
     $(gameImageContainer).appendTo(boxRow);
     $(bodyContainer).appendTo(boxRow);
     $(boxRow).appendTo(box);
-    $(box).appendTo(largeCard);
+    $(box).appendTo(smallCard);
 
-    $(smallCard).appendTo($("#search-results .results"));
+    $(smallCard).appendTo($("#recommendation-results .results"));
   }
-  
+
 };
