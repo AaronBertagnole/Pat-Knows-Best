@@ -23,7 +23,9 @@ $("#search").keyup(function () {
 
         pat.searchBoardGames($("#search").val(), {},function(results) {
           $("#search-results .results").empty();
-          $("#search-results").fadeIn();
+
+
+
           const games = results.games;
           for(let i = 0; i < games.length; i++) {
             console.log(games[i].name);
@@ -35,12 +37,20 @@ $("#search").keyup(function () {
           $("#search-results .results").empty();
           $("#search-results").fadeIn();
           const games = results.results;
-          for(let i = 0; i < games.length; i++) {
-            console.log(games[i].name);
-            pat.getVideoGameById(games[i].id, function(result) {
-              cards.renderLargeVideoGameCard(result);
-            });
+
+          if(results.count > 0) {
+            $("#search-results").fadeIn();
+            for(let i = 0; i < games.length; i++) {
+              console.log(games[i].name);
+              pat.getVideoGameById(games[i].id, function(result) {
+                cards.renderLargeVideoGameCard(result);
+              });
+            }
+          } else {
+            $("#search-results .results").html("No Results Found");
           }
+
+
         });
       } else {
         //TODO:: Display that they need to select a platform for the search
@@ -60,32 +70,63 @@ pat.getPlatforms(function (results) {
 
 $("body").on("click", ".website", function(event) {
   event.preventDefault();
-  var id = $(this).attr("data-id");
+  const id = $(this).attr("data-id");
   $("#search-results .results").children().fadeOut("slow");
-    pat.getVideoGameById(id, function(game) {
-      cards.renderLargeVideoGameCard(game);
-      pat.recommendVideoGames(game.id, $("#platform").val(), {}, function(result) {
-        const recommendations = result.results;
-        $("#pats-recommendations .results").empty();
-        $("#pats-recommendations").fadeIn();
-        for(let i = 0; i < 3; i++) {
-          console.log(recommendations[i].name);
-          pat.getVideoGameById(recommendations[i].id, function (result) {
-            cards.renderRecommendedVideoGameCard(result);
-          });
-        }
-      });
+  pat.getVideoGameById(id, function(game) {
+    cards.renderLargeVideoGameCard(game);
+    pat.recommendVideoGames(game.id, $("#platform").val(), {}, function(result) {
+      const recommendations = result.results;
+      $("#pats-recommendations .results").empty();
+      $("#pats-recommendations").fadeIn();
+      for(let i = 0; i < 3; i++) {
+        console.log(recommendations[i].name);
+        pat.getVideoGameById(recommendations[i].id, function (result) {
+          cards.renderRecommendedVideoGameCard(result);
+        });
+      }
     });
-
+  });
 });
+
+/**
+ * When a User clicks on a not interested button we fade out that item and put in a new item.
+ */
+$("body").on("click", ".not-interested", function(event) {
+  event.preventDefault();
+  $(this).parents(".box-container").fadeOut().remove();
+  pat.recommendationsCurrentItem++;
+  pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
+    cards.renderRecommendedVideoGameCard(result);
+  });
+});
+
+$("body").on("click", "#refresh-all", function(event) {
+  event.preventDefault();
+  $("#pats-recommendations .results").children().fadeOut().remove();
+  for(let i = 0; i < 3; i++) {
+    pat.recommendationsCurrentItem++;
+    pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
+      cards.renderRecommendedVideoGameCard(result);
+    });
+  }
+});
+
 
 $("#pat").on("click", function() {
   if($(this).attr("data-current") === "male") {
+
     $(this).attr("src", $(this).attr("data-female-url"));
     $(this).attr("data-current", "female");
+    localStorage.setItem("avatar", $(this).attr("data-female-url"));
+
   } else {
     $(this).attr("src", $(this).attr("data-male-url"));
     $(this).attr("data-current", "male");
+    localStorage.setItem("avatar", $(this).attr("data-male-url"));
   }
 });
+
+
+
+
 

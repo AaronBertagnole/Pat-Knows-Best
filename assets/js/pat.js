@@ -1,6 +1,7 @@
 const pat = {
 
   // Variables For The Pat Class
+  recommendations: [],
 
   /**
    * This is the main search method. Searches any api and returns the results in json.
@@ -87,6 +88,8 @@ const pat = {
     const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
       pat.search(baseUrl, function (response) {
         console.log("Video game recommendations: ", response);
+        pat.recommendations = response;
+        pat.recommendationsCurrentItem = 2;
         callback(response);
       });
   },

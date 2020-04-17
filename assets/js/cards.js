@@ -64,7 +64,9 @@ cards = {
   },
 
   renderRecommendedVideoGameCard (game) {
-    const largeCard = $('<div class="col-12 mb-3">');
+
+
+    const largeCard = $('<div class="box-container col-12 mb-3">');
     const box = $('<div class="box">');
     const boxRow = $('<div class="row no-gutters">');
     const gameImageContainer = $('<div class="col-2">');
@@ -77,6 +79,7 @@ cards = {
     const footerRow = $('<div class="row">');
     const footerContainer = $(' <div class="col-12 text-right">');
     const website = $('<a href="#" class="website"></a>');
+    const notInterested = $('<a href="#" class="not-interested">Not Interested</a>');
 
     let genresText = "";
     for(let i = 0; i < game.genres.length; i++) {
@@ -104,7 +107,7 @@ cards = {
     }
     $(website).attr("data-id", game.id);
 
-
+    $(notInterested).appendTo(footerContainer);
     $(website).appendTo(footerContainer);
     $(footerContainer).appendTo(footerRow);
 
