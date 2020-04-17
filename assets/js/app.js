@@ -79,3 +79,13 @@ $("body").on("click", ".website", function(event) {
 
 });
 
+$("#pat").on("click", function() {
+  if($(this).attr("data-current") === "male") {
+    $(this).attr("src", $(this).attr("data-female-url"));
+    $(this).attr("data-current", "female");
+  } else {
+    $(this).attr("src", $(this).attr("data-male-url"));
+    $(this).attr("data-current", "male");
+  }
+});
+
