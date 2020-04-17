@@ -10,30 +10,18 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- Plugins -->
-
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 <body>
-  <div>
-    <div class="col-12 text-right">
-      <button 
-        id = "nightModeToggle"
-        class = "nightModeToggle"
-        aria-label="toggle night mode"
-        >
-          <svg
-            width = 80px
-            xmlns= "https://www.w3.org/TR/SVG2/"
-            viewbox = "0 0 2500 496"
-          >
-          <path fill="currentColor" d="M8,256C8,393,119,504,256,504S504,393,504,
-          256,393,8,256,8,8,119,8,256ZM256,440V72a184,184,0,0,1,0,368Z" 
-          transform="translate(-8 -8)"/></svg>
-            </button>
-    </div>
+
+  <!--Change between Light and Dark Themes-->
+  <div id="night-mode-toggle">
+    <i class="fa fa-adjust"></i> <span>Change To Dark Mode</span>
   </div>
+
 
 
   <div class="container">
@@ -41,13 +29,13 @@
 
     <div class="row">
       <div class="col-12 mt-5 text-center">
-        <img src="assets/images/pat_male.png" alt="" class="img-fluid">
-        <img src="assets/images/logo.png" alt="" class="img-fluid">
+        <img id="pat" src="assets/images/pat_male.png" alt="" class="img-fluid">
+        <img id="logo" src="assets/images/logo.png" alt="" class="img-fluid">
       </div>
     </div>
 
 
-    <div class="row">
+    <div class="row mb-5">
       <div class="col-12 mt-5">
         <form action="">
           <div class="input-group">
@@ -65,6 +53,92 @@
       </div>
     </div>
 
+    <div id="search-results" class="row mb-5">
+      <div class="col-12">
+        <h4>Find Your Game</h4>
+      </div>
+      <div class="results"></div>
+    </div>
+
+
+    <div class="row mb-5">
+      <div class="col-12">
+        <h4>Pat's Recommendations</h4>
+      </div>
+      <div class="col-4">
+        <div class="box small">
+          <img src="assets/images/game-placeholder.png" alt="placeholder" />
+          <h2 class="title">CALL of duty modern warfare | warzone (2020)</h2>
+          <h4 class="sub-title">Rating: <span>9.2 (3002 Ratings)</span> Genres: <span>Actions, War</span> Age Rating: <span>M</span></h4>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <a href="#" class="not-interested"><i class="fa fa-refresh"></i> Not Interested</a>
+            </div>
+            <div class="col-7 text-right">
+              <a href="#" class="website">Website: <span>Http://callofduty.com</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="box small">
+          <img src="assets/images/game-placeholder.png" alt="placeholder" />
+          <h2 class="title">CALL of duty modern warfare | warzone (2020)</h2>
+          <h4 class="sub-title">Rating: <span>9.2 (3002 Ratings)</span> Genres: <span>Actions, War</span> Age Rating: <span>M</span></h4>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <a href="#" class="not-interested"><i class="fa fa-refresh"></i> Not Interested</a>
+            </div>
+            <div class="col-7 text-right">
+              <a href="#" class="website">Website: <span>Http://callofduty.com</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4">
+        <div class="box small">
+          <img src="assets/images/game-placeholder.png" alt="placeholder" />
+          <h2 class="title">CALL of duty modern warfare | warzone (2020)</h2>
+          <h4 class="sub-title">Rating: <span>9.2 (3002 Ratings)</span> Genres: <span>Actions, War</span> Age Rating: <span>M</span></h4>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+              in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+          <div class="row">
+            <div class="col-5">
+              <a href="#" class="not-interested"><i class="fa fa-refresh"></i> Not Interested</a>
+            </div>
+            <div class="col-7 text-right">
+              <a href="#" class="website">Website: <span>Http://callofduty.com</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+
   </div>
 
   <!-- Jquery -->
@@ -72,12 +146,14 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <!-- Bootstrap JS -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <!-- Plugins -->
 
   <!-- Pat Script -->
   <script type="text/javascript" src="assets/js/pat.js"></script>
+  <script type="text/javascript" src="assets/js/cards.js"></script>
   <!-- Main App JS -->
   <script type="text/javascript" src="assets/js/app.js"></script>
+  <!-- Night Mode -->
+  <script type="text/javascript" src="assets/js/nightmode.js"></script>
   <!-- Inline Script -->
   <script type="text/javascript"></script>
 </body>

@@ -3,9 +3,9 @@
 let keyTimer;
 $("#search").keyup(function () {
   clearTimeout(keyTimer);
+  $("#search-results .results").empty();
   if( $(this).val().length >= 2 ) {
     keyTimer = setTimeout(function(){
-
       var platform = $("#platform").val();
       console.log("Selected Platform: " + platform);
 
@@ -20,10 +20,14 @@ $("#search").keyup(function () {
         });
       } else if ( platform > 0) {
         // Search for video games
-        pat.searchVideoGames($("#search").val(), platform, {}, function(results) {
+        pat.searchVideoGames($("#search").val(), platform,{},function(results) {
           const games = results.results;
           for(let i = 0; i < games.length; i++) {
             console.log(games[i].name);
+            pat.getVideoGameById(games[i].id, function(result) {
+              cards.renderLargeVideoGameCard(result);
+            });
+
           }
         });
       } else {
@@ -41,9 +45,5 @@ pat.getPlatforms(function (results) {
   }
 });
 
-$(function(){
 
-
-
-});
 
