@@ -23,12 +23,17 @@ $("#search").keyup(function () {
 
         pat.searchBoardGames($("#search").val(), {},function(results) {
           $("#search-results .results").empty();
-
-
-
+          $("#search-results").fadeIn();
           const games = results.games;
-          for(let i = 0; i < games.length; i++) {
-            console.log(games[i].name);
+
+          if(games.length > 0) {
+            $("#search-results").fadeIn();
+            for (let i = 0; i < games.length; i++) {
+              console.log(games[i]);
+              cards.renderSearchBoardGameCard(games[i]);
+            }
+          } else {
+            $("#search-results .results").html("No Results Found");
           }
         });
       } else if (platform > 0) {
@@ -90,7 +95,7 @@ $("body").on("click", ".website", function(event) {
  */
 $("body").on("click", ".not-interested", function(event) {
   event.preventDefault();
-  $(this).parents(".box-container").fadeOut().remove();
+  $(this).parents(".col-4").fadeOut().remove();
   pat.recommendationsCurrentItem++;
   pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
     cards.renderRecommendedVideoGameCard(result);

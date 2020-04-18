@@ -121,6 +121,12 @@ h1, h2, h3, h4, h5, h6 {
   bottom: 0;
 }
 
+#refresh-all {
+  font-family: Oswald, sans-serif;
+  text-transform: uppercase;
+  color: #494949;
+}
+
 #logo {
   position: sticky;
   top: 70%;
