@@ -77,7 +77,6 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
   margin: 5px 0 2px;
   padding:0;
-
 }
 
 .box .sub-title {
@@ -108,8 +107,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
-
-.visibleText {
+.visible-text {
   color: var(--text-color);
 }
 
