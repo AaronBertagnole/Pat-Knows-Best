@@ -24,7 +24,9 @@ const lightMode = {
 // Check Local storage for lightMode if it is currently set to enabled then turn on dark mode.
 if(localStorage.getItem("lightMode") === "enabled") {
   lightMode.enable();
-}
+} else {
+  lightMode.disable();
+};
 
 // On Click of the dark mode icon it will toggle between dark and light mode.
 $("#light-mode-toggle").on("click", function() {
