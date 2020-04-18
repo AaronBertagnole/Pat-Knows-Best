@@ -1,24 +1,4 @@
 
-
-:root {
-  --color-light: #ececec;
-  --color-dark: #202020;
-  --color-primary: #C6383B;
-  --color-secondary: #479BC9;
-  --color-accent: #ff7750;
-
-  --background: #ECECEC;
-  --foreground: #202020;
-  --text-color: #202020;
-
-}
-
-.night-mode {
-  --background: var(--color-dark);
-  --foreground: var(--color-light);
-  --text-color: #ECECEC;
-}
-
 @import "nightmode.css";
 
 body {
