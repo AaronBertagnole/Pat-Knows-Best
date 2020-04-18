@@ -3,7 +3,7 @@
   --color-dark: #202020;
   --color-primary: #C6383B;
   --color-secondary: #479BC9;
-  --background: linear-gradient(to top right, black, #302f2f);
+  --background: linear-gradient(to left, #302f2f, black );
   --foreground: var(--color-light);
 
   --hover: #cfcfcf;
@@ -11,7 +11,7 @@
 }
 
 .light-mode  {
-  --background: linear-gradient(to top right, white, #ececec);
+  --background: linear-gradient(to right, #ececec, white);
   --foreground: black
   --hover: #323232;
 }
