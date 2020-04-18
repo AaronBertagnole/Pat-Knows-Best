@@ -2,6 +2,7 @@
 const pat = {
 
   // Variables For The Pat Class
+  recommendations: [],
 
   /**
    * This is the main search method. Searches any api and returns the results in json.
@@ -26,15 +27,15 @@ const pat = {
    * @param {Object} options - The Options for the search.
    * @param {number} [options.page=1] - The Page we are currently on.
    * @param {number} [options.limit=3] - The amount of items we will retrieve at a time.
+   * @param {string} [options.order="raiting"] - Order the results by this.
    *
    * @param callback
-   *
    */
   searchVideoGames(searchTerm, platform, options, callback) {
     const page = options.page || 1;
     const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games";
-    const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
+    const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page  + "&page_size=" + limit;
     pat.search(baseUrl + queryString, function (response) {
       console.log("Search Video Games: ", response);
       callback(response);
@@ -88,6 +89,8 @@ const pat = {
     const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
       pat.search(baseUrl, function (response) {
         console.log("Video game recommendations: ", response);
+        pat.recommendations = response;
+        pat.recommendationsCurrentItem = 2;
         callback(response);
       });
   },

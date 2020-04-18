@@ -111,6 +111,7 @@ $("body").on("click", "#refresh-all", function(event) {
   }
 });
 
+
 $("#pat").on("click", function() {
   if($(this).attr("data-current") === "male") {
 
