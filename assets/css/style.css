@@ -1,10 +1,11 @@
 
 :root {
-  --color-light: #ffffff;
+  --color-light: #ececec;
   --color-dark: #202020;
   --color-primary: #C6383B;
   --color-secondary: #479BC9;
   --color-accent: #ff7750;
+
   --background: #ECECEC;
   --foreground: #202020;
   --text-color: #202020;
@@ -17,9 +18,9 @@
   --text-color: #ECECEC;
 }
 
+
 body {
   background: var(--background);
-
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -130,13 +131,14 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-light);
 }
 
-#night-mode-toggle {
+#light-mode-toggle {
   position: absolute;
   z-index: 100;
   top: 10px;
   right: 10px;
   color: var(--foreground);
   cursor: pointer;
+  
 }
 
 .pat-text-cont {

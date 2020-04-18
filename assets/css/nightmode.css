@@ -1,0 +1,19 @@
+:root {
+  --color-light: #ececec;
+  --color-dark: #202020;
+  --color-primary: #C6383B;
+  --color-secondary: #479BC9;
+  --color-accent: #ff7750;
+  --background: #202020;
+  --foreground: #ececec;
+  
+}
+
+.light-mode  {
+    --background: var(--color-light);
+    --foreground: var(--color-dark);
+    
+  }
+
+
+
