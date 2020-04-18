@@ -5,12 +5,15 @@
   --color-secondary: #479BC9;
   --background: var(--color-dark);
   --foreground: var(--color-light);
+
+  --hover: #cfcfcf;
   
 }
 
 .light-mode  {
   --background: var(--color-light);
   --foreground: var(--color-dark);
+  --hover: #323232;
 }
 
 

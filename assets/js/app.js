@@ -76,20 +76,32 @@ $("body").on("click", ".get-recommendation", function(event) {
   $("#search-results .visible-text").html("Your Selected Game");
   const id = $(this).attr("data-id");
   $("#search-results > .results > .row").children().fadeOut("slow");
-  pat.getVideoGameById(id, function(game) {
-    cards.renderLargeVideoGameCard(game);
-    pat.recommendVideoGames(game.id, $("#platform").val(), {}, function(result) {
-      const recommendations = result.results;
-      $("#pats-recommendations > .results > .row").empty();
-      $("#pats-recommendations").fadeIn();
-      for(let i = 0; i < 3; i++) {
-        console.log(recommendations[i].name);
-        pat.getVideoGameById(recommendations[i].id, function (result) {
-          cards.renderRecommendedVideoGameCard(result);
-        });
-      }
+
+
+  if(pat.gameType === "video-games") {
+    pat.getVideoGameById(id, function(game) {
+      cards.renderLargeVideoGameCard(game);
+      pat.recommendVideoGames(game.id, $("#platform").val(), {}, function(result) {
+        const recommendations = result.results;
+        $("#pats-recommendations > .results > .row").empty();
+        $("#pats-recommendations").fadeIn();
+        for(let i = 0; i < 3; i++) {
+          console.log(recommendations[i].name);
+          pat.getVideoGameById(recommendations[i].id, function (result) {
+            cards.renderRecommendedVideoGameCard(result);
+          });
+        }
+      });
     });
-  });
+  } else {
+    pat.getBoardGameById(id, function (game) {
+      cards.renderLargeBoardGameCard(game.games[0]);
+      pat.recommendBoardGames({limit: 3}, function(result) {
+        $("#pats-recommendations").fadeIn();
+        cards.renderRecommendedBoardGameCard(result.game);
+      });
+    });
+  }
 });
 
 /**
@@ -98,23 +110,38 @@ $("body").on("click", ".get-recommendation", function(event) {
 $("body").on("click", ".not-interested", function(event) {
   event.preventDefault();
   $(this).parents(".col-4").fadeOut().remove();
-  pat.recommendationsCurrentItem++;
-  pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
-    cards.renderRecommendedVideoGameCard(result);
-  });
+
+  if(pat.gameType === "video-games") {
+    pat.recommendationsCurrentItem++;
+    pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
+      cards.renderRecommendedVideoGameCard(result);
+    });
+  } else {
+    pat.recommendBoardGames({limit: 1}, function(result) {
+      cards.renderRecommendedBoardGameCard(result.game);
+    });
+  }
+
+
 });
 
 $("body").on("click", "#refresh-all", function(event) {
   event.preventDefault();
   $("#pats-recommendations > .results > .row").children().fadeOut().remove();
-  for(let i = 0; i < 3; i++) {
-    pat.recommendationsCurrentItem++;
-    pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
-      cards.renderRecommendedVideoGameCard(result);
+  if(pat.gameType === "video-games") {
+    for(let i = 0; i < 3; i++) {
+      pat.recommendationsCurrentItem++;
+      pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
+        cards.renderRecommendedVideoGameCard(result);
+      });
+    }
+  } else {
+    pat.recommendBoardGames({limit: 3}, function(result) {
+      cards.renderRecommendedBoardGameCard(result.game);
     });
   }
-});
 
+});
 
 $("#pat").on("click", function() {
   if($(this).attr("data-current") === "male") {

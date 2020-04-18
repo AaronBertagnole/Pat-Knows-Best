@@ -77,7 +77,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom:10px;
 }
 
-.box .not-interested, .box .website {
+.box .not-interested, .box .website, .box .get-recommendation {
   font-size: 1.125em;
   text-transform: uppercase;
   color: #494949;
@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #refresh-all:hover {
-  color:
+  color: var(--color-primary);
 }
 
 #logo {
