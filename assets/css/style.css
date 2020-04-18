@@ -107,6 +107,7 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
+
 .visibleText {
   color: var(--text-color);
 }
@@ -114,9 +115,9 @@ h1, h2, h3, h4, h5, h6 {
 #pat {
   max-height: 250px;
   position: relative;
-  top:15%;
-  left: 1%;
-  bottom: 10%
+  top:48px;
+  left: 20px;
+  bottom: 0;
 }
 
 #logo {
@@ -138,5 +139,40 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
+.pat-text-cont {
+  height: 250px;
+  width: 126px;
+  position: absolute;
+  top:48px;
+  left: 20px;
+  bottom: 0;
+  opacity: 0;
+  font-family: 'Amatic SC', cursive;
+  z-index: -2;
+  text-align: center;
+  margin-left: 8px;
+}
+
+#pat:hover {
+  opacity: 0.5;
+  transition-delay: 0s;
+  transition-duration: .3s;
+  cursor: pointer;
+}
+
+.example:hover .pat-text-cont {
+opacity: 1;
+transition-delay: 0s;
+  transition-duration: .3s;
+}
+.pat-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #202020;
+  color: white;
+  
+}
 
 
