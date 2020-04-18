@@ -166,8 +166,8 @@ transition-delay: 0s;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #202020;
-  color: white;
+  background-color: var(--hover);
+  color: var(--background);
   
 }
 
