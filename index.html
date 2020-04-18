@@ -6,7 +6,7 @@
   <title>Pat Knows Best</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Oswald:200,300,400,500,600,700|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Oswald:200,300,400,500,600,700|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Amatic+SC:wght@700&display=swap" rel="stylesheet">
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <!-- Plugins -->
@@ -31,7 +31,13 @@
 
     <div class="row">
       <div class="col-2">
-        <img id="pat" src="assets/images/pat_male.png" alt="" class="img-fluid" data-female-url="assets/images/pat_female.png" data-male-url="assets/images/pat_male.png" data-current="male">
+        <div class="example">
+          <img id="pat" src="assets/images/pat_male.png" alt="" class="img-fluid" data-female-url="assets/images/pat_female.png" 
+          data-male-url="assets/images/pat_male.png" data-current="male">
+          <div class="pat-text-cont">
+            <div class="pat-text">Click to change my gender!</div>
+          </div>
+        </div>
       </div>
       <div class="col-10 mt-5 text-center">
         <img id="logo" src="assets/images/logo.png" alt="" class="img-fluid">
@@ -59,14 +65,15 @@
 
     <div id="search-results" class="row mb-5">
       <div class="col-12">
-        <h4>Find Your Game</h4>
+        <h4 class="visibleText">Find Your Game</h4>
       </div>
       <div class="results"></div>
     </div>
 
+
     <div id="pats-recommendations" class="row mb-5">
       <div class="col-12">
-        <h4>Pats Recommendations</h4>
+        <h4 class="visibleText">Pats Recommendations</h4>
         <a href="#" id="refresh-all"><i class="fa fa-refresh"></i> Refresh All Recommendations</a>
       </div>
       <div class="results"></div>
