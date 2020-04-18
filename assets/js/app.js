@@ -111,7 +111,6 @@ $("body").on("click", "#refresh-all", function(event) {
   }
 });
 
-
 $("#pat").on("click", function() {
   if($(this).attr("data-current") === "male") {
 
@@ -125,6 +124,11 @@ $("#pat").on("click", function() {
     localStorage.setItem("avatar", $(this).attr("data-male-url"));
   }
 });
+
+if (localStorage.getItem("avatar") == "assets/images/pat_female.png") {
+  $("#pat").attr("src", $("#pat").attr("data-female-url"));
+    $("#pat").attr("data-current", "female");
+} 
 
 
 

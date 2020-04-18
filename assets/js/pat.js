@@ -1,78 +1,7 @@
-<<<<<<< HEAD
 
-// JavaScript (jQuery) example
-var settings = {
-  "async": true,
-  "crossDomain": true,
-  "url": "https://avatargen.io/api/generator",
-  "method": "POST",
-  "headers": {
-      "content-type": "application/x-www-form-urlencoded",
-      "cache-control": "no-cache"
-      "apiKey": "MY_API_KEY"
-  },
-  "data": { // from your users
-      "gender": "female",
-      "skin_tone": "light",
-      "head_shape": "diamond",
-      "hair_length": "short",
-      "hair_color": "blond",
-      "hair_type": "straight",
-      "hair_style": "blow_out",
-      "eye_color": "blue",
-      "glasses": "square",
-      "body_type": "generic"
-  }
-};
-
-$.ajax(settings).done(function (response) {
-  console.log(response.avatar); // >> "data:image/png;base64,somechars=="
-  // $("img").attr("src", response.avatar);
-});
-        
-
-
-
-//night mode javascript
-//we grab the value of "nightMode" from local storage and use it later, basically check and see if user 
-//has night mode enabled or dabled
-let nightMode= localStorage.getItem('nightMode')
-const nightModeToggle = document.querySelector("#nightModeToggle");
-console.log(nightMode);
-//this varable is a function to enable night mode (it will add a class to body called nightMode)
-const enableNightMode = () => {
-  document.body.classList.add('nightMode');
-  localStorage.setItem('nightMode', 'enabled')
-};
-//the same thing, to set night mode to disabled, or null (and remove the nightMode class)
-const disableNightMode = () => {
-  document.body.classList.remove('nightMode');
-  localStorage.setItem('nightMode', null);
-};
-//if night mode is enabled in localstorage, enable night mode (so user will have night 
-// mode enabled on page load if they have already done night mode, otherwise, it will defealt to root class perameters)
-if (nightMode === 'enabled') {
-  enableNightMode()
-};
-//when user clicks the night mode button, if night mode is enabled, it will disable, and vice-versa
-
-nightModeToggle.addEventListener('click', () => {
-  nightMode = localStorage.getItem('nightMode');
-  if (nightMode !== 'enabled') {
-    enableNightMode();
-    console.log(nightMode);
-  } else {
-    disableNightMode();
-    console.log(nightMode);
-  }
-});
-
-=======
->>>>>>> 6b828b4a70d59d254c9c264cd3f0383dafb2f5fe
 const pat = {
 
   // Variables For The Pat Class
-  recommendations: [],
 
   /**
    * This is the main search method. Searches any api and returns the results in json.
@@ -97,15 +26,15 @@ const pat = {
    * @param {Object} options - The Options for the search.
    * @param {number} [options.page=1] - The Page we are currently on.
    * @param {number} [options.limit=3] - The amount of items we will retrieve at a time.
-   * @param {string} [options.order="raiting"] - Order the results by this.
    *
    * @param callback
+   *
    */
   searchVideoGames(searchTerm, platform, options, callback) {
     const page = options.page || 1;
     const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games";
-    const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page  + "&page_size=" + limit;
+    const queryString = "?platforms=" + platform + "&search=" + searchTerm + "&page=" + page + "&page_size=" + limit;
     pat.search(baseUrl + queryString, function (response) {
       console.log("Search Video Games: ", response);
       callback(response);
@@ -159,8 +88,6 @@ const pat = {
     const baseUrl = "https://api.rawg.io/api/games/" + gameId + "/suggested";
       pat.search(baseUrl, function (response) {
         console.log("Video game recommendations: ", response);
-        pat.recommendations = response;
-        pat.recommendationsCurrentItem = 2;
         callback(response);
       });
   },
