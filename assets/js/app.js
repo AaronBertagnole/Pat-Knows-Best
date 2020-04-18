@@ -37,7 +37,6 @@ $("#search").keyup(function () {
           $("#search-results .results").empty();
           $("#search-results").fadeIn();
           const games = results.results;
-
           if(results.count > 0) {
             $("#search-results").fadeIn();
             for(let i = 0; i < games.length; i++) {
@@ -49,8 +48,6 @@ $("#search").keyup(function () {
           } else {
             $("#search-results .results").html("No Results Found");
           }
-
-
         });
       } else {
         //TODO:: Display that they need to select a platform for the search
