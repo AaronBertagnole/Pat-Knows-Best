@@ -7,11 +7,14 @@
   --color-accent: #ff7750;
   --background: #ECECEC;
   --foreground: #202020;
+  --text-color: #202020;
+
 }
 
 .night-mode {
   --background: var(--color-dark);
   --foreground: var(--color-light);
+  --text-color: #ECECEC;
 }
 
 body {
@@ -52,13 +55,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .box.small {
-  padding: 0 10px 3px 10px;
+  padding: 0px;
+}
+
+.box.small .body {
+  padding: 0px 10px 3px 10px;
 }
 
 .box.small img {
   max-height: 150px;
   position: relative;
-  left: -15px;
+  /* left: -15px; */
+  width: 100%;
 }
 
 .box .title{
@@ -100,6 +108,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+.visibleText {
+  color: var(--text-color);
+}
 
 #pat {
   max-height: 250px;
@@ -134,5 +145,40 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 
+.pat-text-cont {
+  height: 250px;
+  width: 126px;
+  position: absolute;
+  top:48px;
+  left: 20px;
+  bottom: 0;
+  opacity: 0;
+  font-family: 'Amatic SC', cursive;
+  z-index: -2;
+  text-align: center;
+  margin-left: 8px;
+}
+
+#pat:hover {
+  opacity: 0.5;
+  transition-delay: 0s;
+  transition-duration: .3s;
+  cursor: pointer;
+}
+
+.example:hover .pat-text-cont {
+opacity: 1;
+transition-delay: 0s;
+  transition-duration: .3s;
+}
+.pat-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #202020;
+  color: white;
+  
+}
 
 
