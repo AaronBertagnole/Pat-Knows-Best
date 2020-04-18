@@ -94,15 +94,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
-.hover {
-  transition: all 0.2s ease-in-out;
-}
-
-.hover-glow:hover {
-  color: red;
-  box-shadow: 15px 15px 15px 15px rgb(181, 206, 235);
-}
-
 .visible-text {
   color: var(--foreground);
 }
