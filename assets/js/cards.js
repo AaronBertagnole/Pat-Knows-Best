@@ -1,7 +1,7 @@
 cards = {
   renderLargeVideoGameCard(game) {
     const largeCard = $('<div class="col-12 mb-3">');
-    const box = $('<div class="box">');
+    const box = $('<div class="box hover hover-glow">');
     const boxRow = $('<div class="row no-gutters">');
     const gameImageContainer = $('<div class="col-2">');
     const gameImage = $('<img class="img-fluid float-left" src="" alt="" />');
@@ -109,7 +109,7 @@ cards = {
 
   renderRecommendedVideoGameCard(game) {
     const smallCard = $('<div class="col-4">');
-    const box = $('<div class="box small">');
+    const box = $('<div class="box small hover hover-glow">');
     const body = $('<div class="body">');
     const title = $('<h2 class="title"></h2>');
     // make title link to website ?
