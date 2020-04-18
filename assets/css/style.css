@@ -1,24 +1,4 @@
-
-:root {
-  --color-light: #ececec;
-  --color-dark: #202020;
-  --color-primary: #C6383B;
-  --color-secondary: #479BC9;
-  --color-accent: #ff7750;
-
-  --background: #ECECEC;
-  --foreground: #202020;
-  --text-color: #202020;
-
-}
-
-.night-mode {
-  --background: var(--color-dark);
-  --foreground: var(--color-light);
-  --text-color: #ECECEC;
-}
-
-
+@import "nightmode.css";
 body {
   background: var(--background);
 }
@@ -94,13 +74,19 @@ h1, h2, h3, h4, h5, h6 {
   font-family: Roboto, sans-serif;
   font-size: 1em;
   font-weight: 300;
+  margin-bottom:10px;
 }
 
 .box .not-interested, .box .website {
-  font-size: .875em;
+  font-size: 1.125em;
   text-transform: uppercase;
   color: #494949;
-  margin-bottom: -50px;
+  margin-top: 10px
+
+}
+
+.box .website {
+  font-size: .875em;
 }
 
 .box .website > span {
@@ -108,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .visible-text {
-  color: var(--text-color);
+  color: var(--foreground);
 }
 
 #pat {
@@ -122,7 +108,11 @@ h1, h2, h3, h4, h5, h6 {
 #refresh-all {
   font-family: Oswald, sans-serif;
   text-transform: uppercase;
-  color: #494949;
+  float: right;
+}
+
+#refresh-all:hover {
+  color:
 }
 
 #logo {
