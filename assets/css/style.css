@@ -1,4 +1,26 @@
+
+
+:root {
+  --color-light: #ececec;
+  --color-dark: #202020;
+  --color-primary: #C6383B;
+  --color-secondary: #479BC9;
+  --color-accent: #ff7750;
+
+  --background: #ECECEC;
+  --foreground: #202020;
+  --text-color: #202020;
+
+}
+
+.night-mode {
+  --background: var(--color-dark);
+  --foreground: var(--color-light);
+  --text-color: #ECECEC;
+}
+
 @import "nightmode.css";
+
 body {
   background: var(--background);
 }
@@ -93,6 +115,15 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-secondary);
 }
 
+.hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.hover-glow:hover {
+  color: red;
+  box-shadow: 15px 15px 15px 15px rgb(181, 206, 235);
+}
+
 .visible-text {
   color: var(--foreground);
 }
@@ -132,7 +163,6 @@ h1, h2, h3, h4, h5, h6 {
   right: 10px;
   color: var(--foreground);
   cursor: pointer;
-  
 }
 
 .pat-text-cont {
@@ -170,5 +200,3 @@ transition-delay: 0s;
   color: var(--background);
   
 }
-
-
