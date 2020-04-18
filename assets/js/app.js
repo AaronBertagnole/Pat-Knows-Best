@@ -126,6 +126,11 @@ $("#pat").on("click", function() {
   }
 });
 
+if (localStorage.getItem("avatar") == "assets/images/pat_female.png") {
+  $("#pat").attr("src", $("#pat").attr("data-female-url"));
+    $("#pat").attr("data-current", "female");
+} 
+
 
 
 
