@@ -58,18 +58,19 @@ cards = {
   renderSmallVideoGameCards (game) {
     const smallCard = $('<div class="col-4">');
     const box = $('<div class="box small">');
+    const title = $('<h2 class="title"></h2>');
+    const subTitle = $('<h4 class="sub-title">');
+    const content = $('<div class="content">');
+    const footerRow = $('<div class="row">');
+    const notInterested = $('<a href="#" class="not-interested">');
+    const website = $('<a href="#" class="website"></a>');
+    
     const boxRow = $('<div class="row no-gutters">');
     const gameImageContainer = $('<div class="col-2">');
     const gameImage = $('<img class="img-fluid float-left" src="" alt="" />');
     const bodyContainer = $('<div class="col-4">');
     const body = $('<div class="body float-left">');
-    const title = $('<h2 class="title"></h2>');
-    const subTitle = $('<h4 class="sub-title">');
-    const content = $('<div class="content">');
-    const footerRow = $('<div class="row">');
     const footerContainer = $('<div class="col-4 text-right">');
-    const notInterested = $('<a href="#" class="not-interested">');
-    const website = $('<a href="#" class="website"></a>');
 
     let genresText = "";
     for(let i = 0; i < game.genres.length; i++) {
