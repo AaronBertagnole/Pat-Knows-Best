@@ -8,10 +8,11 @@ $("#pats-recommendations").hide();
 let keyTimer;
 $("#search").keyup(function () {
   clearTimeout(keyTimer);
-  $("#search-results .results").empty();
+  $("#search-results > .results > .row").empty();
   $("#search-results").fadeOut();
-  $("#pats-recommendations .results").empty();
+  $("#pats-recommendations > .results > .row").empty();
   $("#pats-recommendations").fadeOut();
+  $("#search-results .visible-text").html("Choose Your Game");
   if( $(this).val().length >= 2 ) {
     keyTimer = setTimeout(function(){
       var platform = $("#platform").val();
@@ -22,7 +23,7 @@ $("#search").keyup(function () {
         // Search for board games
 
         pat.searchBoardGames($("#search").val(), {},function(results) {
-          $("#search-results .results").empty();
+          $("#search-results .results .row").empty();
           $("#search-results").fadeIn();
           const games = results.games;
 
@@ -33,13 +34,13 @@ $("#search").keyup(function () {
               cards.renderSearchBoardGameCard(games[i]);
             }
           } else {
-            $("#search-results .results").html("No Results Found");
+            $("#search-results > .results > .row").html("No Results Found");
           }
         });
       } else if (platform > 0) {
         // Search for video games
         pat.searchVideoGames($("#search").val(), platform,{},function(results) {
-          $("#search-results .results").empty();
+          $("#search-results .results .row").empty();
           $("#search-results").fadeIn();
           const games = results.results;
           if(results.count > 0) {
@@ -47,16 +48,16 @@ $("#search").keyup(function () {
             for(let i = 0; i < games.length; i++) {
               console.log(games[i].name);
               pat.getVideoGameById(games[i].id, function(result) {
-                cards.renderLargeVideoGameCard(result);
+                cards.renderSearchVideoGameCard(result);
               });
             }
           } else {
-            $("#search-results .results").html("No Results Found");
+            $("#search-results > .results > .row").html("No Results Found");
           }
         });
       } else {
         //TODO:: Display that they need to select a platform for the search
-        $("#search-results .results").html("Please Select A Platform");
+        $("#search-results > .results > .row").html("Please Select A Platform");
         console.log('please select a platform');
       }
     }, 300);
@@ -70,24 +71,37 @@ pat.getPlatforms(function (results) {
   }
 });
 
-$("body").on("click", ".website", function(event) {
+$("body").on("click", ".get-recommendation", function(event) {
   event.preventDefault();
+  $("#search-results .visible-text").html("Your Selected Game");
   const id = $(this).attr("data-id");
-  $("#search-results .results").children().fadeOut("slow");
-  pat.getVideoGameById(id, function(game) {
-    cards.renderLargeVideoGameCard(game);
-    pat.recommendVideoGames(game.id, $("#platform").val(), {}, function(result) {
-      const recommendations = result.results;
-      $("#pats-recommendations .results").empty();
-      $("#pats-recommendations").fadeIn();
-      for(let i = 0; i < 3; i++) {
-        console.log(recommendations[i].name);
-        pat.getVideoGameById(recommendations[i].id, function (result) {
-          cards.renderRecommendedVideoGameCard(result);
-        });
-      }
+  $("#search-results > .results > .row").children().fadeOut("slow");
+
+
+  if(pat.gameType === "video-games") {
+    pat.getVideoGameById(id, function(game) {
+      cards.renderLargeVideoGameCard(game);
+      pat.recommendVideoGames(game.id, $("#platform").val(), {}, function(result) {
+        const recommendations = result.results;
+        $("#pats-recommendations > .results > .row").empty();
+        $("#pats-recommendations").fadeIn();
+        for(let i = 0; i < 3; i++) {
+          console.log(recommendations[i].name);
+          pat.getVideoGameById(recommendations[i].id, function (result) {
+            cards.renderRecommendedVideoGameCard(result);
+          });
+        }
+      });
     });
-  });
+  } else {
+    pat.getBoardGameById(id, function (game) {
+      cards.renderLargeBoardGameCard(game.games[0]);
+      pat.recommendBoardGames({limit: 3}, function(result) {
+        $("#pats-recommendations").fadeIn();
+        cards.renderRecommendedBoardGameCard(result.game);
+      });
+    });
+  }
 });
 
 /**
@@ -96,23 +110,38 @@ $("body").on("click", ".website", function(event) {
 $("body").on("click", ".not-interested", function(event) {
   event.preventDefault();
   $(this).parents(".col-4").fadeOut().remove();
-  pat.recommendationsCurrentItem++;
-  pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
-    cards.renderRecommendedVideoGameCard(result);
-  });
-});
 
-$("body").on("click", "#refresh-all", function(event) {
-  event.preventDefault();
-  $("#pats-recommendations .results").children().fadeOut().remove();
-  for(let i = 0; i < 3; i++) {
+  if(pat.gameType === "video-games") {
     pat.recommendationsCurrentItem++;
     pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
       cards.renderRecommendedVideoGameCard(result);
     });
+  } else {
+    pat.recommendBoardGames({limit: 1}, function(result) {
+      cards.renderRecommendedBoardGameCard(result.game);
+    });
   }
+
+
 });
 
+$("body").on("click", "#refresh-all", function(event) {
+  event.preventDefault();
+  $("#pats-recommendations > .results > .row").children().fadeOut().remove();
+  if(pat.gameType === "video-games") {
+    for(let i = 0; i < 3; i++) {
+      pat.recommendationsCurrentItem++;
+      pat.getVideoGameById(pat.recommendations.results[pat.recommendationsCurrentItem].id, function (result) {
+        cards.renderRecommendedVideoGameCard(result);
+      });
+    }
+  } else {
+    pat.recommendBoardGames({limit: 3}, function(result) {
+      cards.renderRecommendedBoardGameCard(result.game);
+    });
+  }
+
+});
 
 $("#pat").on("click", function() {
   if($(this).attr("data-current") === "male") {

@@ -3,6 +3,7 @@ const pat = {
 
   // Variables For The Pat Class
   recommendations: [],
+  gameType: "",
 
   /**
    * This is the main search method. Searches any api and returns the results in json.
@@ -32,6 +33,7 @@ const pat = {
    * @param callback
    */
   searchVideoGames(searchTerm, platform, options, callback) {
+    pat.gameType = "video-games";
     const page = options.page || 1;
     const limit = options.limit || 3;
     const baseUrl = "https://api.rawg.io/api/games";
@@ -61,6 +63,7 @@ const pat = {
    * @param callback
    */
   searchBoardGames(name, options, callback) {
+    pat.gameType = "board-games";
     const limit = options.limit || 3;
     const orderBy = options.orderBy || "popularity";
     const fuzzyMatch = options.fuzzyMatch || true;
@@ -68,6 +71,15 @@ const pat = {
     const baseUrl = "https://www.boardgameatlas.com/api/search";
     const queryString = "?name=" + name+ "&limit=" + limit + "&order_by=" + orderBy + "&fuzzy_match=" + fuzzyMatch + "&client_id=AoMOmUcuiK";
 
+    pat.search(baseUrl + queryString, function(response) {
+      console.log("Search Board Games: ", response);
+      callback(response);
+    });
+  },
+
+  getBoardGameById(id, callback) {
+    const baseUrl = "https://www.boardgameatlas.com/api/search";
+    const queryString = "?ids=" + id + "&client_id=AoMOmUcuiK";
     pat.search(baseUrl + queryString, function(response) {
       console.log("Search Board Games: ", response);
       callback(response);
@@ -102,7 +114,7 @@ const pat = {
    * @returns {json}
   */
   recommendBoardGames(options, callback) {
-    const limit = options.limit || 3;
+    const limit = options.limit || 10;
     const baseUrl = "https://www.boardgameatlas.com/api/search";
     const queryString = "?random=true&client_id=AoMOmUcuiK";
     for (let i = 0; i < limit; i++) {
@@ -111,6 +123,7 @@ const pat = {
         callback(response);
       });
     }
+
   },
 
   /**
